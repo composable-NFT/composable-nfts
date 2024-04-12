@@ -1,4 +1,5 @@
 import { Hreo } from '@/components/hero';
+import { LandingContent } from '@/components/landing-content';
 import { Navbar } from '@/components/navbar';
 import Image from 'next/image';
 
@@ -8,6 +9,7 @@ export default function Home() {
 			<div className="mx-auto h-full max-w-screen-xl">
 				<Navbar />
 				<Hreo />
+				<LandingContent />
 			</div>
 		</main>
 	);
