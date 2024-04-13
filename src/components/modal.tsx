@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import shanghai from '../../public/shanghai.jpg';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import { MintButton } from './mint-ui/mint-button';
 interface ModalProps {
 	show: boolean;
 	onClose: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
-	const [info, setInfo] = React.useState<any>();
+	// const [info, setInfo] = React.useState<any>();
+	const [info, setInfo] = React.useState({});
 	useEffect(() => {
 		if (show) {
 			setInfo(
@@ -37,22 +39,27 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 				className="absolute left-1/2 top-1/2  z-50 flex w-4/5 max-w-lg -translate-x-1/2 -translate-y-1/2 transform items-center space-x-4 bg-white p-4"
 				onClick={(e) => e.stopPropagation()}
 			>
-				<Image
-					className="w-1/2"
-					src={info?.src}
-					width={300}
-					height={440}
-					alt="Modal"
-				/>
+				{Object.keys(info).length !== 0 && (
+					<Image
+						className="w-1/2"
+						src={info!.src}
+						width={300}
+						height={440}
+						alt="Modal"
+					/>
+				)}
 				<div>
 					<p className="flex-grow text-black">{info?.name}</p>
-					<div className=" text-start text-xs  text-gray-500">{info?.des}</div>
-					<Button
+					<div className=" text-start text-xs  font-normal text-gray-500">
+						{info?.des}
+					</div>
+					{/* <Button
 						variant="premium"
 						className="mt-4 rounded-full p-4  font-semibold md:p-6 md:text-lg"
 					>
 						Start Mint!
-					</Button>
+					</Button> */}
+					<MintButton />
 				</div>
 			</div>
 		</div>

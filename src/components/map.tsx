@@ -2,13 +2,15 @@ import china from './china.json';
 import * as echarts from 'echarts'; //全局引入 ，可按需引入
 import React, { useImperativeHandle, useEffect, useRef } from 'react';
 import Modal from './modal';
+import { useModalStore } from '@/store/useModalStore';
 
 const ChinaMap = React.forwardRef((props: any, ref) => {
 	const chartRef = useRef();
 	const topNumber = props.data[0].value;
 	const bottomNumber = props.data[props.data.length - 1].value;
 	const lastHightLight = useRef<any>();
-	const [show, setShow] = React.useState(false);
+	// const [show, setShow] = React.useState(false);
+	const { isShow, setIsShow } = useModalStore();
 	console.log(ref, 'ref');
 	const echartsMapClick = () => {
 		//点击地图模块逻辑事件
@@ -47,7 +49,8 @@ const ChinaMap = React.forwardRef((props: any, ref) => {
 				seriesIndex: 0,
 				dataIndex: lastHightLight.current
 			});
-			setShow(true);
+			// setShow(true);
+			setIsShow(true);
 		}, 3000);
 	};
 
@@ -113,7 +116,8 @@ const ChinaMap = React.forwardRef((props: any, ref) => {
 
 	return (
 		<div>
-			<Modal show={show} onClose={() => setShow(false)} />
+			{/* <Modal show={show} onClose={() => setShow(false)} /> */}
+			<Modal show={isShow} onClose={() => setIsShow(false)} />
 			<div style={{ width: '100%', minHeight: '500px' }} ref={chartRef} />
 		</div>
 	);

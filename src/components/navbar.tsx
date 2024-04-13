@@ -8,10 +8,16 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { injected } from 'wagmi/connectors';
 import { useConnect } from 'wagmi';
+
 const font = Montserrat({
 	weight: '600',
 	subsets: ['latin']
 });
+const navigation = [
+	{ name: 'Marketplace', href: '#' },
+	{ name: 'Share to X', href: 'https://twitter.com/VitalikButerin' },
+	{ name: 'Github', href: 'https://github.com/composable-NFT' }
+];
 
 export const Navbar = () => {
 	const { connect } = useConnect();
@@ -32,6 +38,19 @@ export const Navbar = () => {
 					Palamedes
 				</h1>
 			</Link>
+			<div className="hidden lg:flex lg:gap-x-12">
+				{' '}
+				{navigation.map((item) => (
+					<a
+						key={item.name}
+						href={item.href}
+						className="text-lg font-semibold leading-6 text-white"
+						target="_blank"
+					>
+						{item.name}
+					</a>
+				))}
+			</div>
 			<div className="flex items-center gap-x-2">
 				<Link href={'/'}>
 					<Button
@@ -39,7 +58,7 @@ export const Navbar = () => {
 						className="rounded-full"
 						onClick={() => connect({ connector: injected() })}
 					>
-						Wallet
+						Connect Wallet
 					</Button>
 				</Link>
 			</div>

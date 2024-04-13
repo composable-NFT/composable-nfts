@@ -4,24 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const testimonials = [
 	{
+		index: 1,
 		name: 'Antonio',
 		avatar: 'A',
 		title: 'Artist',
 		description: "This is the most amazing NFTs I've created!"
 	},
 	{
+		index: 2,
 		name: 'Antonio',
 		avatar: 'A',
 		title: 'Artist',
 		description: "This is the most amazing NFTs I've created!"
 	},
 	{
+		index: 3,
 		name: 'Antonio',
 		avatar: 'A',
 		title: 'Artist',
 		description: "This is the most amazing NFTs I've created!"
 	},
 	{
+		index: 4,
 		name: 'Antonio',
 		avatar: 'A',
 		title: 'Artist',
@@ -38,7 +42,7 @@ export const LandingContent = () => {
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{testimonials.map((item) => (
 					<Card
-						key={item.description}
+						key={item.index}
 						className="border-none bg-[#192339] text-white"
 					>
 						<CardHeader>
