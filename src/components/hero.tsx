@@ -3,8 +3,15 @@
 import Link from 'next/link';
 import TypewriterComponent from 'typewriter-effect';
 import { Button } from '@/components/ui/button';
+import ReactECharts from 'echarts-for-react';
+import { useEffect, useRef } from 'react';
+import ChinaMap from '@/components/map';
 
 export const Hreo = () => {
+	const mapRef = useRef(null);
+	const getNTF = () => {
+		mapRef.current?.highlightRandomData();
+	};
 	return (
 		<div className="space-y-5 py-36 text-center font-bold text-white">
 			<div className="space-y-5 text-4xl font-extrabold sm:text-5xl md:text-6xl lg:text-7xl">
@@ -23,14 +30,23 @@ export const Hreo = () => {
 				Create your own Composable NFTs.
 			</div>
 			<div>
-				<Link href="/mint">
-					<Button
-						variant="premium"
-						className="rounded-full p-4 font-semibold md:p-6 md:text-lg"
-					>
-						Start Mint
-					</Button>
-				</Link>
+				{/* <Link href="/mint"> */}
+				<Button
+					variant="premium"
+					className="rounded-full p-4 font-semibold md:p-6 md:text-lg"
+					onClick={() => getNTF()}
+				>
+					lottery
+				</Button>
+				{/* </Link> */}
+
+				<ChinaMap
+					ref={mapRef}
+					data={[
+						{ name: '北京', value: 2000 },
+						{ name: '上海', value: 4000 }
+					]}
+				/>
 			</div>
 		</div>
 	);

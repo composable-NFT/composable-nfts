@@ -3,7 +3,11 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './provider';
 
+import { china } from '@/components/china';
+
 const inter = Inter({ subsets: ['latin'] });
+import * as echarts from 'echarts/core';
+echarts.registerMap('china', china);
 
 export const metadata: Metadata = {
 	title: 'Palamedes',
@@ -15,6 +19,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	console.log(echarts, 'echarts');
 	return (
 		<html lang="en">
 			<body className={inter.className}>
