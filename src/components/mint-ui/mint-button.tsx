@@ -8,7 +8,6 @@ import { Loading } from '@/components/loading';
 import { useModalStore } from '@/store/useModalStore';
 
 import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
-import { log } from 'console';
 
 const sleep = (time: number) => (new Promise(r => setTimeout(r, time)))
 
@@ -25,7 +24,9 @@ const abi = [{
 	"stateMutability": "payable",
 	"type": "function"
 }]
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+
+// sepolia
+const contractAddress = '0x5EcBC930C89AA39BB57534271324A4Cd6B81d4d7';
 
 type PinataMetaData = {
 	metaData: string,

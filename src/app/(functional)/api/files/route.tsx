@@ -11,9 +11,11 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file: File | null = data.get("file") as unknown as File;
     const metadata = data.get("metadata") || "{}";
-    data.append("file", file);
-    data.append("pinataMetadata", metadata);
-    
+    const fm = new FormData()
+
+    fm.append("file", file);
+    fm.append("pinataMetadata", metadata);
+
     const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
       method: "POST",
       headers: {
@@ -21,8 +23,8 @@ export async function POST(request: NextRequest) {
       },
       body: data,
     });
+
     const { IpfsHash } = await res.json();
-    console.log(IpfsHash);
 
     return NextResponse.json({ IpfsHash }, { status: 200 });
   } catch (e) {
