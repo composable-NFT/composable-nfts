@@ -11,19 +11,7 @@ import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 
 const sleep = (time: number) => (new Promise(r => setTimeout(r, time)))
 
-const abi = [{
-	"inputs": [
-		{
-			"internalType": "string",
-			"name": "tokenUri",
-			"type": "string"
-		}
-	],
-	"name": "mintNft",
-	"outputs": [],
-	"stateMutability": "payable",
-	"type": "function"
-}]
+const abi = [{"type":"function","name":"mintNft","inputs":[],"outputs":[],"stateMutability":"nonpayable"}]
 
 // sepolia
 const contractAddress = '0x5EcBC930C89AA39BB57534271324A4Cd6B81d4d7';
@@ -52,7 +40,7 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 		console.log(isConfirming);
 		console.log(isConfirmed);
 		if (isPending) {
-			setLoadingText('NFT上')
+			setLoadingText('NFT上链中')
 		} else if (isConfirmed) {
 			setLoadingText('交易已完成')
 			mintFinished(null)
@@ -100,7 +88,7 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 				abi,
 				address: contractAddress,
 				functionName: 'mintNft',
-				args: [cid],
+				// args: [cid],
 			})
 		}
 		catch (e) {

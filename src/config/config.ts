@@ -3,6 +3,12 @@ import {
 	Chain,
 } from '@rainbow-me/rainbowkit';
 
+
+import {
+	mainnet,
+	sepolia,
+  } from 'wagmi/chains';
+
 const Morph = {
 	id: 2710,
 	name: 'Morph Testnet',
@@ -18,5 +24,5 @@ const Morph = {
 export const config = getDefaultConfig({
 	appName: 'My RainbowKit App',
 	projectId: 'YOUR_PROJECT_ID',
-	chains: [Morph],
+	chains: [mainnet,sepolia,Morph],
 });
