@@ -14,7 +14,7 @@ export const Hreo = () => {
 		mapRef.current?.highlightRandomData();
 	};
 	return (
-		<div className="space-y-5 py-36 text-center font-bold text-white">
+		<div className="space-y-5 pt-36 text-center font-bold text-white">
 			<div className="space-y-5 text-4xl font-extrabold sm:text-5xl md:text-6xl lg:text-7xl">
 				<h1>To make your NFT jounery</h1>
 				<div className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
@@ -37,7 +37,7 @@ export const Hreo = () => {
 					className="rounded-full p-4 font-semibold md:p-6 md:text-lg"
 					onClick={() => getNTF()}
 				>
-					lottery
+					Lottery
 				</Button>
 				{/* </Link> */}
 

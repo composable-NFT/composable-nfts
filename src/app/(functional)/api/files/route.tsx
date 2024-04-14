@@ -1,10 +1,10 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest } from 'next/server';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
 
     const { IpfsHash } = await res.json();
 
-    return NextResponse.json({ IpfsHash }, { status: 200 });
-  } catch (e) {
-    console.log(e);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
+		return NextResponse.json({ IpfsHash }, { status: 200 });
+	} catch (e) {
+		console.log(e);
+		return NextResponse.json(
+			{ error: 'Internal Server Error' },
+			{ status: 500 }
+		);
+	}
 }

@@ -16,15 +16,15 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 			setInfo(
 				Math.random() < 0.5
 					? {
-						des: "Shanghai is the largest city in China by population and the largest city proper by population in the world. It is one of the four direct-controlled municipalities of the People's Republic of China, with a population of more than 24 million as of 2017. It is a global financial center and transport hub, with the world's busiest container port. Located in the Yangtze River Delta, it sits on the south edge of the estuary of the Yangtze in the middle portion of the East China coast. The municipality borders the provinces of Jiangsu and Zhejiang to the north, south and west, and is bounded to the east by the East China Sea.",
-						src: '/shanghai.jpg',
-						name: 'SHANGHAI'
-					}
+							des: "Shanghai is the largest city in China by population and the largest city proper by population in the world. It is one of the four direct-controlled municipalities of the People's Republic of China, with a population of more than 24 million as of 2017. It is a global financial center and transport hub, with the world's busiest container port. Located in the Yangtze River Delta, it sits on the south edge of the estuary of the Yangtze in the middle portion of the East China coast. The municipality borders the provinces of Jiangsu and Zhejiang to the north, south and west, and is bounded to the east by the East China Sea.",
+							src: '/shanghai.jpg',
+							name: 'SHANGHAI'
+						}
 					: {
-						des: "Beijing, alternatively romanized as Peking, is the capital of the People's Republic of China. It is the world's most populous capital city, with over 21 million residents within an administrative area of 16,410.5 km2. The city, located in Northern China, is governed as a municipality under the direct administration of the central government with 16 urban, suburban, and rural districts. Beijing is mostly surrounded by Hebei Province with the exception of neighboring Tianjin to the southeast; together, the three divisions form the Jingjinji megalopolis and the national capital region of China.",
-						src: '/beijing.jpg',
-						name: 'BEIJING'
-					}
+							des: "Beijing, alternatively romanized as Peking, is the capital of the People's Republic of China. It is the world's most populous capital city, with over 21 million residents within an administrative area of 16,410.5 km2. The city, located in Northern China, is governed as a municipality under the direct administration of the central government with 16 urban, suburban, and rural districts. Beijing is mostly surrounded by Hebei Province with the exception of neighboring Tianjin to the southeast; together, the three divisions form the Jingjinji megalopolis and the national capital region of China.",
+							src: '/beijing.jpg',
+							name: 'BEIJING'
+						}
 			);
 		} else {
 			setInfo({});
@@ -36,12 +36,12 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 			onClick={onClose}
 		>
 			<div
-				className="absolute left-1/2 top-1/2  z-50 flex w-4/5 max-w-lg -translate-x-1/2 -translate-y-1/2 transform items-center space-x-4 bg-white p-4"
+				className="absolute left-1/2 top-1/2  z-50 flex w-4/5 max-w-lg -translate-x-1/2 -translate-y-1/2 transform items-center space-x-4 rounded-lg bg-white bg-gradient-to-br from-purple-200 to-blue-300 p-4"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{Object.keys(info).length !== 0 && (
 					<Image
-						className="w-1/2"
+						className="w-1/2 rounded-sm"
 						// @ts-ignore
 						src={info!.src}
 						width={300}
@@ -62,7 +62,12 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 					>
 						Start Mint!
 					</Button> */}
-					<MintButton metaData={JSON.stringify({ name: info.name, desc: info.des })} img={info.src} />
+					<MintButton
+						/* @ts-ignore */
+						metaData={JSON.stringify({ name: info.name, desc: info.des })}
+						/* @ts-ignore */
+						img={info.src}
+					/>
 				</div>
 			</div>
 		</div>
