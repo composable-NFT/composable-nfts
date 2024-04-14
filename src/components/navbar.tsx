@@ -5,10 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { injected } from 'wagmi/connectors';
 import { useConnect } from 'wagmi';
-
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 const font = Montserrat({
 	weight: '600',
 	subsets: ['latin']
@@ -53,13 +51,14 @@ export const Navbar = () => {
 			</div>
 			<div className="flex items-center gap-x-2">
 				<Link href={'/'}>
-					<Button
+					{/* <Button
 						variant="outline"
 						className="rounded-full"
 						onClick={() => connect({ connector: injected() })}
 					>
-						Connect Wallet
-					</Button>
+						Wallet
+					</Button> */}
+					<ConnectButton></ConnectButton>
 				</Link>
 			</div>
 		</nav>

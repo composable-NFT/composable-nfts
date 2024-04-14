@@ -21,4 +21,4 @@ const mintPage = () => {
 	);
 };
 
-export default mintPage;
+export default MintPage;
