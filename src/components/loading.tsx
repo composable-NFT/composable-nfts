@@ -1,8 +1,8 @@
-export const Loading = () => {
+export const Loading = ({ loadingText = 'Loading...' }) => {
   return (
     <div
       role="status"
-      className="fixed inset-0 bg-black bg-opacity-45 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-45 flex flex-col justify-center items-center z-50"
     >
       <svg
         aria-hidden="true"
@@ -20,7 +20,7 @@ export const Loading = () => {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <span className="mt-4 text-slate-100">{loadingText}</span>
     </div>
   )
 }
