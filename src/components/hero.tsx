@@ -10,6 +10,7 @@ import ChinaMap from '@/components/map';
 export const Hreo = () => {
 	const mapRef = useRef(null);
 	const getNTF = () => {
+		// @ts-ignore
 		mapRef.current?.highlightRandomData();
 	};
 	return (

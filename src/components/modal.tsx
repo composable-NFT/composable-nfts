@@ -42,6 +42,7 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 				{Object.keys(info).length !== 0 && (
 					<Image
 						className="w-1/2"
+						// @ts-ignore
 						src={info!.src}
 						width={300}
 						height={440}
@@ -49,8 +50,10 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 					/>
 				)}
 				<div>
+					{/* @ts-ignore */}
 					<p className="flex-grow text-black">{info?.name}</p>
 					<div className=" text-start text-xs  font-normal text-gray-500">
+						{/* @ts-ignore */}
 						{info?.des}
 					</div>
 					{/* <Button

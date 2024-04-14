@@ -4,10 +4,11 @@ import './globals.css';
 import { Providers } from './provider';
 import { Toaster } from '@/components/ui/toaster';
 
-import { china } from '@/components/china';
+import * as china from '@/components/china.json';
 
 const inter = Inter({ subsets: ['latin'] });
 import * as echarts from 'echarts/core';
+// @ts-ignore
 echarts.registerMap('china', china);
 
 export const metadata: Metadata = {

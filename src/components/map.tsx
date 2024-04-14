@@ -118,6 +118,7 @@ const ChinaMap = React.forwardRef((props: any, ref) => {
 		<div>
 			{/* <Modal show={show} onClose={() => setShow(false)} /> */}
 			<Modal show={isShow} onClose={() => setIsShow(false)} />
+			{/* @ts-ignore */}
 			<div style={{ width: '100%', minHeight: '500px' }} ref={chartRef} />
 		</div>
 	);
