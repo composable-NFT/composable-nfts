@@ -36,12 +36,12 @@ const Modal: React.FC<ModalProps> = ({ show, onClose }) => {
 			onClick={onClose}
 		>
 			<div
-				className="absolute left-1/2 top-1/2  z-50 flex w-4/5 max-w-lg -translate-x-1/2 -translate-y-1/2 transform items-center space-x-4 bg-white p-4"
+				className="absolute left-1/2 top-1/2  z-50 flex w-4/5 max-w-lg -translate-x-1/2 -translate-y-1/2 transform items-center space-x-4 rounded-lg bg-white bg-gradient-to-br from-purple-200 to-blue-300 p-4"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{Object.keys(info).length !== 0 && (
 					<Image
-						className="w-1/2"
+						className="w-1/2 rounded-sm"
 						// @ts-ignore
 						src={info!.src}
 						width={300}
