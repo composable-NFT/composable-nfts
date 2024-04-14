@@ -47,6 +47,9 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 		} else if (isConfirming) {
 			// 交易确认中
 			setLoadingText('交易确认中')
+			setTimeout(()=>{
+				mintFinished(null)
+			},3000)
 		} else if (error) {
 			console.log(error);
 			setLoadingText("NFT上链失败：" + error.name)
@@ -110,7 +113,7 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 				title: 'Mint successfully 🎉',
 				description: (
 					<a
-						href={`https://explorer-testnet.morphl2.io/tx/${hash}`}
+						href={`https://sepolia.etherscan.io/tx/${hash}`}
 						className="hover:underline"
 						target="_blank"
 					>
