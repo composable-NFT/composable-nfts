@@ -7,19 +7,27 @@ import { ToastAction } from '@/components/ui/toast';
 import { Loading } from '@/components/loading';
 import { useModalStore } from '@/store/useModalStore';
 
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 
-const sleep = (time: number) => (new Promise(r => setTimeout(r, time)))
+const sleep = (time: number) => new Promise((r) => setTimeout(r, time));
 
-const abi = [{"type":"function","name":"mintNft","inputs":[],"outputs":[],"stateMutability":"nonpayable"}]
+const abi = [
+	{
+		type: 'function',
+		name: 'mintNft',
+		inputs: [],
+		outputs: [],
+		stateMutability: 'nonpayable'
+	}
+];
 
 // sepolia
 const contractAddress = '0x5EcBC930C89AA39BB57534271324A4Cd6B81d4d7';
 
 type PinataMetaData = {
-	metaData: string,
-	img: string,
-}
+	metaData: string;
+	img: string;
+};
 
 export const MintButton = ({ metaData, img }: PinataMetaData) => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,11 +35,12 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 	const { toast } = useToast();
 	const { isShow, setIsShow } = useModalStore();
 
-	const [cid, setCid] = useState("");
+	const [cid, setCid] = useState('');
 
 	// 链上交互 START
 	const { data: hash, error, isPending, writeContract } = useWriteContract();
-	const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash });
+	const { isLoading: isConfirming, isSuccess: isConfirmed } =
+		useWaitForTransactionReceipt({ hash });
 	useEffect(() => {
 		console.log('交易状态发生改变');
 		console.log(hash);
@@ -40,68 +49,67 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 		console.log(isConfirming);
 		console.log(isConfirmed);
 		if (isPending) {
-			setLoadingText('NFT上链中')
+			setLoadingText('NFT上链中');
 		} else if (isConfirmed) {
-			setLoadingText('交易已完成')
-			mintFinished(null)
+			setLoadingText('交易已完成');
+			mintFinished(null);
 		} else if (isConfirming) {
 			// 交易确认中
-			setLoadingText('交易确认中')
-			setTimeout(()=>{
-				mintFinished(null)
-			},3000)
+			setLoadingText('交易确认中');
+			setTimeout(() => {
+				mintFinished(null);
+			}, 3000);
 		} else if (error) {
 			console.log(error);
-			setLoadingText("NFT上链失败：" + error.name)
-			mintFinished(error.name)
+			setLoadingText('NFT上链失败：' + error.name);
+			mintFinished(error.name);
 		}
-
-	}, [isPending, error, isConfirming, isConfirmed])
-	// 链上交互 END 
+	}, [isPending, error, isConfirming, isConfirmed]);
+	// 链上交互 END
 
 	const uploadFile = async () => {
 		const filePath = img;
 		console.log(metaData, img);
-		const fileStream = (await fetch(filePath));
+		const fileStream = await fetch(filePath);
 		const type = fileStream.headers.get('Content-Type') || '';
 		const buffer = await fileStream.arrayBuffer();
-		const file = new File([buffer], filePath.split('/').pop() || 'image', { type });
+		const file = new File([buffer], filePath.split('/').pop() || 'image', {
+			type
+		});
 		const data = new FormData();
-		data.set("file", file);
-		data.set("metadata", metaData);
+		data.set('file', file);
+		data.set('metadata', metaData);
 		console.log('START upload');
-		const res = await fetch("/api/files", {
-			method: "POST",
-			body: data,
+		const res = await fetch('/api/files', {
+			method: 'POST',
+			body: data
 		});
 		const resData = await res.json();
+		console.log(resData, 'resData');
 		setCid(resData.IpfsHash);
-
 	};
 
 	const handleMint = async () => {
 		setIsLoading(true);
-		setLoadingText('NFT数据上传中...')
+		setLoadingText('NFT数据上传中...');
 		try {
 			await uploadFile();
 			await sleep(3000);
 			// 获取cid 保存至区块链中
-			setLoadingText('NFT数据上链中...')
+			setLoadingText('NFT数据上链中...');
 			writeContract({
 				abi,
 				address: contractAddress,
-				functionName: 'mintNft',
+				functionName: 'mintNft'
 				// args: [cid],
-			})
+			});
+		} catch (e) {
+			return mintFinished(e);
 		}
-		catch (e) {
-			return mintFinished(e)
-		}
-
 	};
 
 	const mintFinished = (error: any) => {
-		setLoadingText('')
+		setLoadingText('');
 		setIsShow(false);
 		setIsLoading(false);
 		if (error) {
@@ -123,7 +131,7 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 				action: <ToastAction altText="Confirm">Confirm ✨</ToastAction>
 			});
 		}
-	}
+	};
 
 	return (
 		<div>
@@ -136,5 +144,5 @@ export const MintButton = ({ metaData, img }: PinataMetaData) => {
 			</Button>
 			{isLoading && <Loading loadingText={loadingText} />}
 		</div>
-	)
-}
+	);
+};
